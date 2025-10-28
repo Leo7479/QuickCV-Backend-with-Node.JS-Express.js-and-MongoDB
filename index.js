@@ -12,7 +12,7 @@ connectDB(process.env.MONGO_URI);
 
 // middlewares
 app.use(cors({
-  origin: ["0.0.0.0/0"],
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 })); // allow cross-origin requests (adjust origin in production)
