@@ -11,7 +11,11 @@ const PORT = process.env.PORT || 5000;
 connectDB(process.env.MONGO_URI);
 
 // middlewares
-app.use(cors()); // allow cross-origin requests (adjust origin in production)
+aapp.use(cors({
+  origin: ["0.0.0.0/0"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+})); // allow cross-origin requests (adjust origin in production)
 app.use(express.json()); // parse JSON
 
 // routes
