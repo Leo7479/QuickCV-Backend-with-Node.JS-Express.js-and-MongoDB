@@ -10,24 +10,26 @@ const PORT = process.env.PORT || 5000;
 // connect DB
 connectDB(process.env.MONGO_URI);
 
-// middlewares
+// CORS (allow all origins)
 app.use(cors({
   origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-})); // allow cross-origin requests (adjust origin in production)
-app.use(express.json()); // parse JSON
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+}));
+app.options("*", cors());
 
-// routes
+// Parse JSON body
+app.use(express.json());
+
+// Routes
 app.use('/api/auth', require('./routes/Auth'));
 
-// root
+// Default route
 app.get('/', (req, res) => res.send('Auth server running'));
 
-// error handling (basic)
+// Error handling
 app.use((err, req, res, next) => {
-  console.error('Unhandled error', err);
+  console.error('Unhandled error:', err);
   res.status(500).json({ msg: 'Something went wrong' });
 });
 
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`✅ Server listening on port ${PORT}`));
