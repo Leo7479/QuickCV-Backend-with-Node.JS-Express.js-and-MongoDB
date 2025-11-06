@@ -22,6 +22,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/auth', require('./routes/Auth'));
+app.use('/api/user-details', require('./routes/UserDetails'));
 
 // Default route
 app.get('/', (req, res) => res.send('Auth server running'));
@@ -32,4 +33,4 @@ app.use((err, req, res, next) => {
   res.status(500).json({ msg: 'Something went wrong' });
 });
 
-app.listen(PORT, () => console.log(`✅ Server listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));

@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
-// ✅ Register
 router.post("/register", async (req, res) => {
   const { name, email, password } = req.body;
   console.log("Register attempt:", req.body);
@@ -14,8 +13,6 @@ router.post("/register", async (req, res) => {
     if (existing) {
       return res.status(400).json({ message: "User already exists" });
     }
-
-    // ✅ Hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
@@ -29,7 +26,6 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// ✅ Login
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
   console.log("Login attempt:", req.body);
@@ -38,7 +34,6 @@ router.post("/login", async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "User not found" });
 
-    // ✅ Compare hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     console.log("Password match:", isMatch);
 
