@@ -3,7 +3,6 @@ const express = require("express");
 const router = express.Router();
 const UserDetails = require("../models/UserDetails");
 
-// ✅ Create or Update user details (Upsert)
 router.post("/save/:userId", async (req, res) => {
   const { userId } = req.params;
   const formData = req.body; // frontend sends the full array
@@ -28,8 +27,6 @@ router.post("/save/:userId", async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-
-// ✅ Get user details by userId
 router.get("/:userId", async (req, res) => {
   const { userId } = req.params;
   try {
@@ -44,7 +41,6 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-// ✅ Delete user details (optional)
 router.delete("/:userId", async (req, res) => {
   const { userId } = req.params;
   try {

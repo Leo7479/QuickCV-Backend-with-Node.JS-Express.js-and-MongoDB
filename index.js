@@ -23,6 +23,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', require('./routes/Auth'));
 app.use('/api/user-details', require('./routes/UserDetails'));
+app.use("/api/visited-templates",require("./routes/VisitedTemplates"));
 
 // Default route
 app.get('/', (req, res) => res.send('Auth server running'));
